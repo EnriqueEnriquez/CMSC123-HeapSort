@@ -13,16 +13,22 @@ public class Main {
             choice = scanner.nextLine();
 
             if (choice.equalsIgnoreCase("A")){
-                System.out.print("Enter array delimited with commas: ");
+                System.out.print("Enter array delimited with commas \", \": ");
                 String input = scanner.nextLine();
                 String[] array = input.split(", ");
                 int[] arr = new int[array.length];
-                for (int i = 0; i < array.length; i++){
-                    arr[i] = Integer.parseInt(array[i]);
-                }
 
-                heapSort(arr);
-                System.out.println("Sorted Array: " + Arrays.toString(arr));
+                try {
+                    for (int i = 0; i < array.length; i++){
+                        arr[i] = Integer.parseInt(array[i]);
+                    }
+
+                    heapSort(arr);
+                    System.out.println("Sorted Array: " + Arrays.toString(arr));
+                }
+                catch (NumberFormatException e){
+                    System.out.println("Invalid input. Please try again.");
+                }
 
             }
 
@@ -55,8 +61,8 @@ public class Main {
     }
 
     static void heapify(int[] arr, int heapsize, int rootIndex) {
-        int leftChildIndex = 2 * rootIndex + 1;
-        int rightChildIndex = 2 * rootIndex + 2;
+        int leftChildIndex = 2 * rootIndex;
+        int rightChildIndex = 2 * rootIndex + 1;
         int maxIndex = rootIndex;
 
         if (leftChildIndex < heapsize && arr[leftChildIndex] > arr[rootIndex]) {
